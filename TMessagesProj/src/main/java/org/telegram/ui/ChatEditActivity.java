@@ -1346,7 +1346,11 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
                 if (isChannel) {
                     type = isPrivate ? LocaleController.getString("TypePrivate", R.string.TypePrivate) : LocaleController.getString("TypePublic", R.string.TypePublic);
                 } else {
-                    type = isPrivate ? LocaleController.getString("TypePrivateGroup", R.string.TypePrivateGroup) : LocaleController.getString("TypePublicGroup", R.string.TypePublicGroup);
+                    if (isPrivate) {
+                        type = currentChat != null && currentChat.noforwards ? LocaleController.getString("TypePrivateRestrictedGroup", R.string.TypePrivateRestrictedGroup) : LocaleController.getString("TypePrivateGroup", R.string.TypePrivateGroup);
+                    } else {
+                        type = LocaleController.getString("TypePublicGroup", R.string.TypePublicGroup);
+                    }
                 }
                 if (isChannel) {
                     typeCell.setTextAndValue(LocaleController.getString("ChannelType", R.string.ChannelType), type, historyCell != null && historyCell.getVisibility() == View.VISIBLE || linkedCell != null && linkedCell.getVisibility() == View.VISIBLE);

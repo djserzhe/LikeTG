@@ -6162,4 +6162,13 @@ public class MessageObject {
     public boolean equals(MessageObject obj) {
         return getId() == obj.getId() && getDialogId() == obj.getDialogId();
     }
+
+    public boolean noForwardsEnabledOnGroupChat() {
+        TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(messageOwner.peer_id.channel_id != 0 ? messageOwner.peer_id.channel_id : messageOwner.peer_id.chat_id);
+        if (chat != null) {
+        return chat.noforwards;
+        } else {
+            return false;
+        }
+    }
 }
